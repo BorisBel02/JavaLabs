@@ -1,4 +1,5 @@
 package com.company;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,8 +8,8 @@ import java.util.HashMap;
 import  java.lang.StringBuilder;
 
 public class ReadFile {
-    public Integer fillMap(String fileName){
-        HashMap<StringBuilder, Integer> map = new HashMap<StringBuilder, Integer>();
+    public void fillMap(String fileName){
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
         Integer counter = 0;
         Reader reader = null;
         try{
@@ -17,26 +18,29 @@ public class ReadFile {
             StringBuilder word = new StringBuilder();
             while(true){
                 int code = reader.read();
-                if(code == -1){
-                    break;
-                }
+
 
                 if(!Character.isLetterOrDigit((char)code)){
-                    if(!map.containsKey(word)){
-                        map.put(word, 1);
+                    String wordStr = word.toString();
+                    if(!map.containsKey(wordStr) && word.length() > 0){
+                        map.put(wordStr, 1);
+                        ++counter;
+                        word.delete(0, word.length());
                     }
-                    else{
-                        map.put(word, map.get(word) + 1);
+                    else if(word.length() > 0){
+                        map.put(wordStr, map.get(wordStr) + 1);
+                        ++counter;
+                        word.delete(0, word.length());
                     }
-                    word.delete(0, word.length() - 1);
-                    ++counter;
+                    if(code == -1){
+                        break;
+                    }
                     continue;
                 }
-
                 word.append((char)code);
             }
             PrintStats print = new PrintStats();
-            print.printStats(map);
+            print.printStats(map, counter);
         }
         catch (IOException e){
                 System.err.println("Error while reading file: "+e.getLocalizedMessage());
@@ -52,6 +56,5 @@ public class ReadFile {
 
             }
         }
-        return counter;
     }
 }
