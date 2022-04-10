@@ -1,0 +1,51 @@
+package proj.values_stack;
+
+import org.apache.log4j.Logger;
+import proj.Exception.StackIsEmptyException;
+
+import java.util.*;
+
+public class Stack {
+    private static Stack StackInstance = new Stack();
+    private static final Logger logger = Logger.getLogger(Stack.class);
+
+    private Stack(){
+        values = new ArrayList<>();
+        definedVariables = new HashMap<>();
+    }
+
+    public static Stack getStackInstance(){
+        return StackInstance;
+    }
+
+    private Map<String, Double> definedVariables;
+    private List<Double> values;
+
+    public void addVar(String key, Double value){
+        definedVariables.put(key, value);
+    }
+    public void push(Double val){
+        values.add(0, val);
+    }
+    public Double pop() throws StackIsEmptyException {
+        if(values.size() == 0){
+            logger.error("Attempt to pop from empty stack.");
+            throw new StackIsEmptyException("Stack is empty.");
+        }
+        Double val = values.get(0);
+        values.remove(0);
+        return val;
+    }
+    public Double pseudo_pop() throws StackIsEmptyException {
+        if(values.size() == 0){
+            throw new StackIsEmptyException("Stack is empty.");
+        }
+        return values.get(0);
+    }
+    public final List<Double> returnStack(){
+        return Collections.unmodifiableList(values);
+    }
+    public Integer size(){
+        return values.size();
+    }
+}
