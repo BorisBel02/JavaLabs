@@ -32,7 +32,7 @@ public class Factory {
     public void loadCommands(){
         try {
             Properties props = new Properties();
-            props.load(new FileInputStream("C:\\Users\\borik\\IdeaProjects\\JavaLabs\\Calculator\\src\\main\\java\\proj\\factory\\Commands.properties"));
+            props.load(new FileInputStream(String.valueOf(Factory.class.getResourceAsStream("Commands.properties"))));
 
             loadedCommands = new HashMap<String, Command>();
             props.forEach((key, value) -> {

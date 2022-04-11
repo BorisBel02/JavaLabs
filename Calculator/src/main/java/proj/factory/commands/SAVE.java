@@ -22,7 +22,6 @@ public class SAVE implements Command {
                     writer.write(e.toString() + '\n');
                 } catch (IOException ex) {
                     System.err.println("Error while writing file: "+ex.getLocalizedMessage());
-                    return;
                 }
             });
             logger.info(this + " - DONE");

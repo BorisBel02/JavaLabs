@@ -16,7 +16,6 @@ public class SUB implements Command {
         try{
             count = Integer.parseInt(args[1]);
         }catch (NumberFormatException e) {
-
             count = stack.getVar(args[1]);
         }
         if(stack.size() < count){
