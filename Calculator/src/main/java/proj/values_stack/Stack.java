@@ -2,6 +2,7 @@ package proj.values_stack;
 
 import org.apache.log4j.Logger;
 import proj.Exception.StackIsEmptyException;
+import proj.Exception.UndefinedVariable;
 
 import java.util.*;
 
@@ -23,6 +24,15 @@ public class Stack {
 
     public void addVar(String key, Double value){
         definedVariables.put(key, value);
+    }
+    public Double getVar(String key) throws UndefinedVariable {
+        if(definedVariables.containsKey(key)) {
+            return definedVariables.get(key);
+        }
+        else{
+            logger.error("Variable: " + key + " was not defined");
+            throw new UndefinedVariable(key);
+        }
     }
     public void push(Double val){
         values.add(0, val);

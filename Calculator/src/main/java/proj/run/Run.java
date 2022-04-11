@@ -1,13 +1,9 @@
 package proj.run;
 
 import org.apache.log4j.Logger;
-import proj.Exception.StackIsEmptyException;
-import proj.Exception.UndefinedCommandException;
-import proj.Exception.WrongArgumentsQuantity;
+import proj.Exception.*;
 import proj.factory.Factory;
 import proj.factory.command_interface.Command;
-import proj.values_stack.Stack;
-
 import java.util.Scanner;
 
 
@@ -50,8 +46,8 @@ public class Run {
             }
             try {
                 command.exec(commandArgs);
-            } catch (StackIsEmptyException | WrongArgumentsQuantity e){
-                System.err.println(e.getLocalizedMessage());
+            } catch (StackIsEmptyException | WrongArgumentsQuantity | UndefinedVariable | InvalidVariableName e){
+                System.err.println(e.toString());
             }
         }
     }
