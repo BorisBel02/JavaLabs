@@ -7,16 +7,11 @@ import proj.Exception.UndefinedVariable;
 import java.util.*;
 
 public class Stack {
-    private static Stack StackInstance = new Stack();
     private static final Logger logger = Logger.getLogger(Stack.class);
 
-    private Stack(){
+    public Stack(){
         values = new ArrayList<>();
         definedVariables = new HashMap<>();
-    }
-
-    public static Stack getStackInstance(){
-        return StackInstance;
     }
 
     private Map<String, Double> definedVariables;
@@ -46,7 +41,7 @@ public class Stack {
         values.remove(0);
         return val;
     }
-    public Double pseudo_pop() throws StackIsEmptyException {
+    public Double pick() throws StackIsEmptyException {
         if(values.size() == 0){
             throw new StackIsEmptyException("Stack is empty.");
         }

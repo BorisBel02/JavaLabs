@@ -4,13 +4,27 @@ import org.apache.log4j.Logger;
 import proj.Exception.*;
 import proj.factory.Factory;
 import proj.factory.command_interface.Command;
+import proj.values_stack.Stack;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 
 public class Run {
     private static final Logger logger = Logger.getLogger(Run.class);
-    public void run(Scanner scanner){
+    public void run(String fileName) throws IOException, UndefinedCommandException, CommandException {
+        Scanner scanner = null;
+        if (fileName.length() == 0) {
+            scanner = new Scanner(System.in);
+        } else{
+            scanner = new Scanner(new FileInputStream(fileName));
+        }
+
+
         Factory factory = Factory.getFactory();
+        Stack stack = new Stack();
         while(scanner.hasNextLine()){
             String str = scanner.nextLine();
             if(str.length() == 0){
@@ -25,29 +39,14 @@ public class Run {
             try {
                 command = factory.getCommand(commandArgs[0]);
             } catch (UndefinedCommandException e) {
-                logger.error(e);
-                System.err.println(e.toString());
-                System.err.println("You can change command. Write new command below or 'n' for a shutdown:");
-                Scanner inScanner = new Scanner(System.in);
-                while (true) {
-                    String comm = inScanner.nextLine();
-                    if ("n".equals(comm)) {
-                        System.exit(0);
-                    } else {
-                        commandArgs = comm.split(" ");
-                        try{
-                            command = factory.getCommand(commandArgs[0]);
-                            break;
-                        } catch (UndefinedCommandException ex){
-                            System.err.println(ex.getLocalizedMessage());
-                        }
-                    }
-                }
+                logger.error(e.getMessage());
+                throw e;
             }
             try {
-                command.exec(commandArgs);
-            } catch (StackIsEmptyException | WrongArgumentsQuantity | UndefinedVariable | InvalidVariableName e){
-                System.err.println(e.toString());
+                command.exec(commandArgs, stack);
+            } catch (CommandException e){
+                logger.error(e.getMessage(), e.getCause());
+                throw e;
             }
         }
     }
