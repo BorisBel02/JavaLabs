@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<TitledPane fx:id="mainStage" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Virus War" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.viruswarmultiplayer.StartFrameController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="547.0">
+         <children>
+            <VBox layoutX="257.0" layoutY="150.0" prefHeight="70.0" prefWidth="85.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#ActionOnConnectButton" prefHeight="25.0" prefWidth="85.0" text="Connect" />
+                  <Button mnemonicParsing="false" onAction="#ActionOnCreateGameButton" text="Create Game" />
+                  <Button mnemonicParsing="false" onAction="#ActionOnHelpButton" prefHeight="25.0" prefWidth="85.0" text="Help" />
+               </children>
+            </VBox>
+         </children></AnchorPane>
+  </content>
+</TitledPane>

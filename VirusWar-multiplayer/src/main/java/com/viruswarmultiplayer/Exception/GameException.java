@@ -1,4 +1,4 @@
-package com.viruswar.viruswarmultiplayer.Exception;
+package com.viruswarmultiplayer.Exception;
 
 public class GameException extends RuntimeException{
     public GameException(String message){

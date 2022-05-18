@@ -113,7 +113,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.viruswar.viruswarmultiplayer/com.viruswar.viruswarmultiplayer.HelloApplication
+                                com.viruswar.viruswarmultiplayer/com.viruswarmultiplayer.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

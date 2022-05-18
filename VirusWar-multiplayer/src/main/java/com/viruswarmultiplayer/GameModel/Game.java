@@ -1,16 +1,16 @@
-package com.viruswar.viruswarmultiplayer.GameModel;
+package com.viruswarmultiplayer.GameModel;
 
-import com.viruswar.viruswarmultiplayer.Exception.GameException;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import com.viruswarmultiplayer.Exception.GameException;
+import com.viruswarmultiplayer.Observer.Observable;
+import com.viruswarmultiplayer.Observer.Observer;
+
 import javafx.util.Pair;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 
 
 public class Game implements Observable {
-    LinkedList<InvalidationListener> observersList = new LinkedList<>();
+    LinkedList<Observer> observersList = new LinkedList<>();
     Character[][] field = new Character[10][10];
     Integer player1Score;
     Integer player2Score;
@@ -58,7 +58,7 @@ public class Game implements Observable {
             for(int j = 0; j < 10; ++j){
                 i[j] = '*';
             }
-            i[10] = '\0';
+
         }
         field[0][0] = 'X';
         field[9][9] = 'O';
@@ -85,7 +85,7 @@ public class Game implements Observable {
             playerTurn = enemy;
             enemy = tmp;
         }
-        //notifySubscribers();
+        notifySubscribers(x, y, Character.toLowerCase(enemy));
     }
     public void grow(Integer x, Integer y){
         if (field[x][y] == '*' && accessible(x, y)) {
@@ -108,7 +108,18 @@ public class Game implements Observable {
             playerTurn = enemy;
             enemy = tmp;
         }
-        //notifySubscribers();
+        notifySubscribers(x, y, playerTurn);
+    }
+
+    @Override
+    public void reg(Observer o) {
+        observersList.add(o);
+    }
+
+    public void notifySubscribers(Integer x, Integer y, Character cell){
+        for(var subscriber : observersList){
+            subscriber.update(x, y, cell);
+        }
     }
     public Character[][] getField(){
         return field.clone();
@@ -123,13 +134,5 @@ public class Game implements Observable {
         return turnCounter;
     }
 
-    @Override
-    public void addListener(InvalidationListener invalidationListener) {
-        observersList.add(invalidationListener);
-    }
 
-    @Override
-    public void removeListener(InvalidationListener invalidationListener) {
-        observersList.remove(invalidationListener);
-    }
 }
