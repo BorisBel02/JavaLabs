@@ -51,17 +51,18 @@ public class ClientFrame implements Observer {
         kill.setOnMouseClicked(
                 mouseEvent -> {
                     currentAction.setText("kill");
+                    currentAction.setStyle("-fx-text-fill: red; -fx-font-weight: bold; -fx-font-size: 20;");
                 }
         );
         grow.setOnMouseClicked(
                 mouseEvent -> {
                     currentAction.setText("grow");
+                    currentAction.setStyle("-fx-text-fill: green; -fx-font-weight: bold; -fx-font-size: 20;");
                 }
         );
         control.getChildren().addAll(kill, grow);
         border.setBottom(control);
 
-        currentAction.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
         border.setTop(currentAction);
 
         stage.setScene(new Scene(border, 600, 600));
