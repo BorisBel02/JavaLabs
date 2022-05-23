@@ -50,11 +50,9 @@ public class ClientWindowController implements Observer {
 
     }
     public void ActionOnKillButton(ActionEvent ev){
-        grid.setGridLinesVisible(true);
         CurrentAction.setText("kill");
     }
     public void ActionOnGrowButton(ActionEvent ev){
-        grid.setGridLinesVisible(true);
         CurrentAction.setText("grow");
     }
 

@@ -18,7 +18,7 @@ public class Server {
     PrintWriter player2Output;
 
     public Server() throws IOException {
-        server = new ServerSocket(4004);
+        server = new ServerSocket(0);
     }
     public void establishConnections() throws IOException{
         player1Socket = server.accept();
@@ -41,9 +41,11 @@ public class Server {
     }
 
     public String recv1() throws IOException {
+        System.out.println("waiting action from player 1");
         return player1Input.readLine();
     }
     public String recv2() throws IOException {
+        System.out.println("waiting action from player 2");
         return player2Input.readLine();
     }
 

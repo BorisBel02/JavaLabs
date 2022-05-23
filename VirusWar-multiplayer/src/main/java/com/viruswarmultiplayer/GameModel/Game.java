@@ -80,12 +80,13 @@ public class Game implements Observable {
             --player1Score;
         }
         ++turnCounter;
+        notifySubscribers(x, y, Character.toLowerCase(enemy));
         if(turnCounter%3 == 0){
             char tmp = playerTurn;
             playerTurn = enemy;
             enemy = tmp;
         }
-        notifySubscribers(x, y, Character.toLowerCase(enemy));
+
     }
     public void grow(Integer x, Integer y){
         if (field[x][y] == '*' && accessible(x, y)) {
@@ -103,12 +104,13 @@ public class Game implements Observable {
             ++player2Score;
         }
         ++filledCells;
+        notifySubscribers(x, y, playerTurn);
         if(turnCounter%3 == 0){
             char tmp = playerTurn;
             playerTurn = enemy;
             enemy = tmp;
         }
-        notifySubscribers(x, y, playerTurn);
+
     }
 
     @Override

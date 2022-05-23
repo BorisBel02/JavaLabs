@@ -17,6 +17,7 @@ public class StartFrameController {
     private TitledPane mainStage;
     public void ActionOnConnectButton(ActionEvent event){
         Platform.runLater(new Connect());
+
     }
 
     public void ActionOnCreateGameButton(ActionEvent e){
@@ -34,7 +35,7 @@ public class StartFrameController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Start Game");
         alert.setHeaderText("Game Started\nPort: " + game.getPort() + "\nHost name: " + game.getHostName());
- //       alert.show();
+        alert.show();
 
     }
     public void ActionOnHelpButton(ActionEvent e){
